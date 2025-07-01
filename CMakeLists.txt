@@ -19,6 +19,7 @@ set(SOURCES
 set(QML_FILES
     qml/main.qml
     qml/TitleBar.qml
+    qml/Gauge.qml
 )
 
 qt_add_executable(qt-interf-test-app ${SOURCES})

@@ -1,5 +1,6 @@
-import QtQuick 6.4
-import QtQuick.Controls 6.4
+import QtQuick
+import QtQuick.Controls
+import QtQuick.Layouts
 
 ApplicationWindow {
     id: mainwindow
@@ -17,6 +18,39 @@ ApplicationWindow {
     }
 
     TitleBar {
+        id: titleBar
         mainwindow: mainwindow
+    }
+
+    GridLayout {
+        anchors.top: titleBar.bottom
+        anchors.left: parent.left
+        anchors.right: parent.right
+        anchors.bottom: parent.bottom
+        anchors.margins: 20
+        columns: 3
+        columnSpacing: 20
+        rowSpacing: 20
+
+        Gauge {
+            title: "Влажность"
+            units: "%"
+            value: 50
+            maxValue: 100
+        }
+
+        Gauge {
+            title: "Температура"
+            units: "°C"
+            value: 20
+            maxValue: 40
+        }
+
+        Gauge {
+            title: "Давление"
+            units: "мм рт ст"
+            value: 760
+            maxValue: 800
+        }
     }
 }
