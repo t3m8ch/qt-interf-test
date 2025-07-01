@@ -3,12 +3,20 @@ import QtQuick.Controls 6.4
 
 ApplicationWindow {
     id: mainwindow
-    width: 800
-    height: 600
+
+    flags: Qt.Window | Qt.FramelessWindowHint
+    width: 900
+    height: 450
     visible: true
+    color: "#394955"
     title: "QT-Interf"
 
-    Text {
-        text: "Привет, мир!"
+    FontLoader {
+        id: roboto
+        source: "qrc:/qt/qml/QtInterfTest/fonts/Roboto.ttf"
+    }
+
+    TitleBar {
+        mainwindow: mainwindow
     }
 }

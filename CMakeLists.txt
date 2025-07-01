@@ -18,6 +18,7 @@ set(SOURCES
 
 set(QML_FILES
     qml/main.qml
+    qml/TitleBar.qml
 )
 
 qt_add_executable(qt-interf-test-app ${SOURCES})
@@ -26,6 +27,11 @@ qt_add_qml_module(qt-interf-test-app
     URI QtInterfTest
     VERSION 0.0.1
     QML_FILES ${QML_FILES}
+    RESOURCES
+        fonts/Roboto.ttf
+        icons/close-line.svg
+        icons/stop-line.svg
+        icons/subtract-line.svg
 )
 
 target_link_libraries(qt-interf-test-app PRIVATE
