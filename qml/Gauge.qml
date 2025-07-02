@@ -44,9 +44,12 @@ Rectangle {
     }
 
     Item {
+        id: gaugeContainer
         anchors.centerIn: parent
         width: Math.min(parent.width, parent.height) * 0.6
         height: width
+
+        readonly property real gaugeRadius: width * 0.6 - 10
 
         Shape {
             id: backgroundCircle
@@ -59,9 +62,9 @@ Rectangle {
                 capStyle: ShapePath.RoundCap
 
                 PathAngleArc {
-                    centerX: backgroundCircle.width / 2
-                    centerY: backgroundCircle.width / 2
-                    radiusX: parent.width / 2 * 0.6 - 10
+                    centerX: gaugeContainer.width / 2
+                    centerY: gaugeContainer.height / 2
+                    radiusX: gaugeContainer.gaugeRadius
                     radiusY: radiusX
                     startAngle: 0
                     sweepAngle: 360
@@ -79,9 +82,9 @@ Rectangle {
                 capStyle: ShapePath.RoundCap
 
                 PathAngleArc {
-                    centerX: backgroundCircle.width / 2
-                    centerY: backgroundCircle.width / 2
-                    radiusX: parent.width / 2 * 0.6 - 10
+                    centerX: gaugeContainer.width / 2
+                    centerY: gaugeContainer.height / 2
+                    radiusX: gaugeContainer.gaugeRadius
                     radiusY: radiusX
                     startAngle: -90
                     sweepAngle: 360 * (gaugeRoot.value / gaugeRoot.maxValue)
@@ -91,11 +94,11 @@ Rectangle {
 
         Text {
             anchors.centerIn: parent
-            text: Math.round(parent.parent.value)
+            text: Math.round(gaugeRoot.value)
             color: "white"
-            font.pixelSize: parent.width * 0.3
+            font.pixelSize: gaugeContainer.width * 0.3
             font.family: "Roboto"
-            font.weight: 700
+            font.weight: Font.Bold
         }
     }
 }
