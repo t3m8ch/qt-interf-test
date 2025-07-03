@@ -3,6 +3,7 @@ import Qt5Compat.GraphicalEffects
 
 Rectangle {
     property Window mainwindow
+    property string title
 
     width: parent.width
     height: 40
@@ -17,7 +18,7 @@ Rectangle {
     }
 
     Text {
-        text: "Метеоданные"
+        text: title
         color: "#d4d4d4"
         font.family: "Roboto"
         font.pixelSize: 22

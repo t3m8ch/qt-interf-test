@@ -32,6 +32,7 @@ ApplicationWindow {
 
     TitleBar {
         id: titleBar
+        title: "Метеоданные"
         mainwindow: mainwindow
     }
 
