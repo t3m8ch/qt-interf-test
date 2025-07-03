@@ -16,8 +16,27 @@ set(SOURCES
     src/weatherData/main.cpp
 )
 
-set(QML_FILES
-    qml/windows/WeatherWindow.qml
+set(RESOURCES
+    fonts/Roboto.ttf
+    icons/close-line.svg
+    icons/stop-line.svg
+    icons/subtract-line.svg
+)
+qt_add_library(qt-interf-resources STATIC)
+qt_add_qml_module(qt-interf-resources
+    URI QtInterfTest.Resources
+    VERSION 0.0.1
+    RESOURCES ${RESOURCES}
+    OUTPUT_DIRECTORY resources
+    NO_PLUGIN
+)
+target_link_libraries(qt-interf-resources PRIVATE
+    Qt6::Core
+    Qt6::Quick
+    Qt6::Qml
+)
+
+set(COMPONENTS
     qml/components/TitleBar.qml
     qml/components/Gauge.qml
     qml/components/MetadataCard.qml
@@ -26,21 +45,30 @@ set(QML_FILES
     qml/components/JournalButton.qml
 )
 
-qt_add_executable(qt-interf-test-app ${SOURCES})
+qt_add_library(qt-interf-components ${COMPONENTS})
+qt_add_qml_module(qt-interf-components
+    URI QtInterfTest.Components
+    VERSION 0.0.1
+    QML_FILES ${COMPONENTS}
+    OUTPUT_DIRECTORY components
+    NO_PLUGIN
+)
+target_link_libraries(qt-interf-components PRIVATE
+    Qt6::Core
+    Qt6::Quick
+    Qt6::Qml
+)
 
+qt_add_executable(qt-interf-test-app ${SOURCES})
 qt_add_qml_module(qt-interf-test-app
     URI QtInterfTest
     VERSION 0.0.1
-    QML_FILES ${QML_FILES}
-    RESOURCES
-        fonts/Roboto.ttf
-        icons/close-line.svg
-        icons/stop-line.svg
-        icons/subtract-line.svg
+    QML_FILES qml/windows/WeatherWindow.qml
 )
-
 target_link_libraries(qt-interf-test-app PRIVATE
     Qt6::Core
     Qt6::Quick
     Qt6::Qml
+    qt-interf-resources
+    qt-interf-components
 )

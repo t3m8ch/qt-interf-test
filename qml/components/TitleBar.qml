@@ -43,7 +43,7 @@ Rectangle {
 
             Image {
                 id: minimizeIcon
-                source: "qrc:/qt/qml/QtInterfTest/icons/subtract-line.svg"
+                source: "qrc:/qt/qml/QtInterfTest/Resources/icons/subtract-line.svg"
                 width: 24
                 height: 24
                 anchors.centerIn: parent
@@ -75,7 +75,7 @@ Rectangle {
 
             Image {
                 id: maximizeIcon
-                source: "qrc:/qt/qml/QtInterfTest/icons/stop-line.svg"
+                source: "qrc:/qt/qml/QtInterfTest/Resources/icons/stop-line.svg"
                 width: 24
                 height: 24
                 anchors.centerIn: parent
@@ -104,7 +104,7 @@ Rectangle {
 
             Image {
                 id: closeIcon
-                source: "qrc:/qt/qml/QtInterfTest/icons/close-line.svg"
+                source: "qrc:/qt/qml/QtInterfTest/Resources/icons/close-line.svg"
                 width: 24
                 height: 24
                 anchors.centerIn: parent

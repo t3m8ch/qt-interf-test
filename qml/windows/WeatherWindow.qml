@@ -1,6 +1,7 @@
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
+import QtInterfTest.Components
 
 ApplicationWindow {
     id: mainwindow
@@ -22,7 +23,7 @@ ApplicationWindow {
 
     FontLoader {
         id: roboto
-        source: "qrc:/qt/qml/QtInterfTest/fonts/Roboto.ttf"
+        source: "qrc:/qt/qml/QtInterfTest/Resources/fonts/Roboto.ttf"
     }
 
     ResizeArea {
