@@ -1,11 +1,7 @@
 import QtQuick
 import QtQuick.Controls
-import QtQuick.Layouts
 
 Button {
-    Layout.alignment: Qt.AlignHCenter
-    Layout.preferredWidth: (gaugeGrid.width - 40) / 3
-    Layout.preferredHeight: 40
     text: "Журнал"
 
     background: Rectangle {

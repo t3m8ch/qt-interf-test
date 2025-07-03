@@ -1,11 +1,8 @@
 import QtQuick
-import QtQuick.Layouts
 import QtQuick.Shapes
 
 Rectangle {
     id: gaugeRoot
-    Layout.fillWidth: true
-    Layout.fillHeight: true
     color: backgroundColor
 
     /*!

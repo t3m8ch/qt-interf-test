@@ -63,6 +63,8 @@ ApplicationWindow {
                 maxValue: 100
                 normalMinValue: 10
                 normalMaxValue: 90
+                Layout.fillWidth: true
+                Layout.fillHeight: true
             }
 
             Gauge {
@@ -75,6 +77,8 @@ ApplicationWindow {
                 normalMaxValue: 30
                 displayMinValue: -50
                 displayMaxValue: 50
+                Layout.fillWidth: true
+                Layout.fillHeight: true
             }
 
             Gauge {
@@ -87,23 +91,34 @@ ApplicationWindow {
                 normalMaxValue: 770
                 displayMinValue: 600
                 displayMaxValue: 800
+                Layout.fillWidth: true
+                Layout.fillHeight: true
             }
 
             MetadataCard {
                 label: "25.04.2025"
+                Layout.fillWidth: true
+                Layout.preferredHeight: 50
             }
 
             MetadataCard {
                 label: "09:01:00"
+                Layout.fillWidth: true
+                Layout.preferredHeight: 50
             }
 
             MetadataCard {
                 label: "Санкт-Петербург"
+                Layout.fillWidth: true
+                Layout.preferredHeight: 50
             }
         }
 
         JournalButton {
             id: journalButton
+            Layout.alignment: Qt.AlignHCenter
+            Layout.preferredWidth: (gaugeGrid.width - 40) / 3
+            Layout.preferredHeight: 40
         }
     }
 }
