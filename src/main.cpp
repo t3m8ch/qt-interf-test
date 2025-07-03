@@ -6,7 +6,8 @@
 int main(int argc, char *argv[]) {
   QGuiApplication app(argc, argv);
   QQmlApplicationEngine engine;
-  const QUrl url(QStringLiteral("qrc:/qt/qml/QtInterfTest/qml/main.qml"));
+  const QUrl url(
+      QStringLiteral("qrc:/qt/qml/QtInterfTest/qml/WeatherWindow.qml"));
 
   QObject::connect(
       &engine, &QQmlApplicationEngine::objectCreated, &app,

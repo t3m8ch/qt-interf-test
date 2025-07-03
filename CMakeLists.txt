@@ -17,7 +17,7 @@ set(SOURCES
 )
 
 set(QML_FILES
-    qml/main.qml
+    qml/WeatherWindow.qml
     qml/TitleBar.qml
     qml/Gauge.qml
     qml/MetadataCard.qml
