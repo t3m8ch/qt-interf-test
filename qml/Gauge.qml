@@ -84,6 +84,19 @@ Rectangle {
         return valueInRange(value, gaugeRoot.displayMinValue, gaugeRoot.displayMaxValue) ? "white" : warningValueColor;
     }
 
+    function gaugeAngle(value) {
+        if (!loaded)
+            return 0;
+
+        if (value < gaugeRoot.minValue)
+            return 0;
+
+        if (value > gaugeRoot.maxValue)
+            return 360;
+
+        return 360 * ((gaugeRoot.value - gaugeRoot.minValue) / (gaugeRoot.maxValue - gaugeRoot.minValue));
+    }
+
     Rectangle {
         id: borderRect
         anchors.fill: parent
@@ -158,7 +171,7 @@ Rectangle {
                     radiusX: gaugeContainer.gaugeRadius
                     radiusY: radiusX
                     startAngle: -90
-                    sweepAngle: loaded ? 360 * ((gaugeRoot.value - gaugeRoot.minValue) / (gaugeRoot.maxValue - gaugeRoot.minValue)) : 0
+                    sweepAngle: gaugeAngle(gaugeRoot.value)
                 }
             }
         }
