@@ -1,4 +1,6 @@
-project_name := "qt-interf-test-app"
+# Project configuration
+weather_data_app := "weather-data"
+weather_control_app := "weather-control"
 build_dir := "build"
 
 red := '\033[0;31m'
@@ -108,20 +110,85 @@ build:
 
     echo -e "{{green}}[SUCCESS]{{nc}} Project built successfully"
 
-# Run application
-run:
+# Run weather data application
+run-weather-data:
     #!/usr/bin/env bash
     set -euo pipefail
 
-    echo -e "{{blue}}[INFO]{{nc}} Running application..."
+    echo -e "{{blue}}[INFO]{{nc}} Running Weather Data application..."
 
-    if [ ! -f "{{build_dir}}/{{project_name}}" ]; then
-        echo -e "{{red}}[ERROR]{{nc}} Executable not found. Build the project first."
+    if [ ! -f "{{build_dir}}/{{weather_data_app}}" ]; then
+        echo -e "{{red}}[ERROR]{{nc}} Weather Data executable not found. Build the project first."
         exit 1
     fi
 
     cd "{{build_dir}}"
-    ./{{project_name}}
+    ./{{weather_data_app}}
+
+# Run weather control application
+run-weather-control:
+    #!/usr/bin/env bash
+    set -euo pipefail
+
+    echo -e "{{blue}}[INFO]{{nc}} Running Weather Control application..."
+
+    if [ ! -f "{{build_dir}}/{{weather_control_app}}" ]; then
+        echo -e "{{red}}[ERROR]{{nc}} Weather Control executable not found. Build the project first."
+        exit 1
+    fi
+
+    cd "{{build_dir}}"
+    ./{{weather_control_app}}
+
+# Run both applications
+run-both:
+    #!/usr/bin/env bash
+    set -euo pipefail
+
+    echo -e "{{blue}}[INFO]{{nc}} Running both applications..."
+
+    if [ ! -f "{{build_dir}}/{{weather_data_app}}" ] || [ ! -f "{{build_dir}}/{{weather_control_app}}" ]; then
+        echo -e "{{red}}[ERROR]{{nc}} One or both executables not found. Build the project first."
+        exit 1
+    fi
+
+    cd "{{build_dir}}"
+    echo -e "{{blue}}[INFO]{{nc}} Starting Weather Data application..."
+    ./{{weather_data_app}} &
+    DATA_PID=$!
+
+    echo -e "{{blue}}[INFO]{{nc}} Starting Weather Control application..."
+    ./{{weather_control_app}} &
+    CONTROL_PID=$!
+
+    echo -e "{{green}}[SUCCESS]{{nc}} Both applications started"
+    echo -e "{{yellow}}[INFO]{{nc}} Weather Data PID: $DATA_PID"
+    echo -e "{{yellow}}[INFO]{{nc}} Weather Control PID: $CONTROL_PID"
+    echo -e "{{yellow}}[INFO]{{nc}} Press Ctrl+C to stop both applications"
+
+    wait
+
+# Generic run command (defaults to weather data)
+run app="data":
+    #!/usr/bin/env bash
+    set -euo pipefail
+
+    case "{{app}}" in
+        "data"|"weather-data")
+            just run-weather-data
+            ;;
+        "control"|"weather-control")
+            just run-weather-control
+            ;;
+        "both"|"all")
+            just run-both
+            ;;
+        *)
+            echo -e "{{red}}[ERROR]{{nc}} Unknown application: {{app}}"
+            echo -e "{{blue}}[INFO]{{nc}} Available options: data, control, both"
+            exit 1
+            ;;
+    esac
 
 # Clean build files
 clean:
@@ -163,9 +230,9 @@ quick mode="debug": check
     just build
 
 # Development mode (quick + run)
-dev mode="debug":
+dev mode="debug" app="data":
     just quick {{mode}}
-    just run
+    just run {{app}}
 
 # Full rebuild
 rebuild mode="debug":
@@ -202,7 +269,7 @@ compile-commands:
     fi
 
 # Watch files and rebuild on changes
-watch:
+watch app="data":
     #!/usr/bin/env bash
 
     if ! command -v entr &> /dev/null; then
@@ -211,7 +278,7 @@ watch:
     fi
 
     echo -e "{{blue}}[INFO]{{nc}} Watching for file changes... (Ctrl+C to stop)"
-    find src qml CMakeLists.txt config.cmake -type f 2>/dev/null | entr -r just dev
+    find src qml CMakeLists.txt config.cmake -type f 2>/dev/null | entr -r just dev debug {{app}}
 
 # Format code with clang-format
 format:
@@ -227,9 +294,22 @@ format:
 
 # Show project information
 help:
-    @echo "Qt Quick 6 Development Project"
+    @echo "Qt Quick 6 Weather Applications Project"
     @echo ""
-    @echo "Project name: {{project_name}}"
+    @echo "Applications:"
+    @echo "  - Weather Data: {{weather_data_app}}"
+    @echo "  - Weather Control: {{weather_control_app}}"
     @echo "Build directory: {{build_dir}}"
+    @echo ""
+    @echo "Usage examples:"
+    @echo "  just dev debug data         # Build and run weather data app"
+    @echo "  just dev debug control      # Build and run weather control app"
+    @echo "  just dev debug both         # Build and run both apps"
+    @echo "  just run data               # Run weather data app only"
+    @echo "  just run control            # Run weather control app only"
+    @echo "  just run both               # Run both apps simultaneously"
+    @echo "  just watch data             # Watch files and rebuild on changes"
+    @echo "  just watch control          # Watch files and rebuild on changes"
+    @echo "  just watch both             # Watch files and rebuild on changes"
     @echo ""
     @just --list
