@@ -21,6 +21,7 @@ set(QML_FILES
     qml/TitleBar.qml
     qml/Gauge.qml
     qml/MetadataCard.qml
+    qml/ResizeArea.qml
 )
 
 qt_add_executable(qt-interf-test-app ${SOURCES})

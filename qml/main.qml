@@ -21,6 +21,11 @@ ApplicationWindow {
         source: "qrc:/qt/qml/QtInterfTest/fonts/Roboto.ttf"
     }
 
+    ResizeArea {
+        id: resizeArea
+        mainwindow: mainwindow
+    }
+
     TitleBar {
         id: titleBar
         mainwindow: mainwindow
