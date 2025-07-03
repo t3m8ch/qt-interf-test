@@ -36,4 +36,37 @@ ApplicationWindow {
     ExitDialog {
         id: exitDialog
     }
+
+    ColumnLayout {
+        anchors.top: titleBar.bottom
+        anchors.left: parent.left
+        anchors.right: parent.right
+        anchors.bottom: parent.bottom
+        anchors.margins: 20
+        spacing: 20
+
+        BorderWithBreak {
+            text: "Источник данных"
+            Layout.fillWidth: true
+            Layout.fillHeight: true
+        }
+
+        BorderWithBreak {
+            text: "Параметры"
+            Layout.fillWidth: true
+            Layout.fillHeight: true
+        }
+
+        BorderWithBreak {
+            text: "Дата/Время"
+            Layout.fillWidth: true
+            Layout.fillHeight: true
+        }
+
+        BorderWithBreak {
+            text: "Местоположение"
+            Layout.fillWidth: true
+            Layout.fillHeight: true
+        }
+    }
 }

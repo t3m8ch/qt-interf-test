@@ -5,6 +5,8 @@ Rectangle {
     property color backgroundColor: "#394955"
     property color borderColor: "#d4d4d4"
 
+    color: backgroundColor
+
     Rectangle {
         id: borderRect
         anchors.fill: parent
