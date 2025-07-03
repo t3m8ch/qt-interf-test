@@ -23,6 +23,7 @@ set(QML_FILES
     qml/MetadataCard.qml
     qml/ResizeArea.qml
     qml/ExitDialog.qml
+    qml/JournalButton.qml
 )
 
 qt_add_executable(qt-interf-test-app ${SOURCES})

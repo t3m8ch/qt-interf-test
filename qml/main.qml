@@ -39,60 +39,71 @@ ApplicationWindow {
         id: exitDialog
     }
 
-    GridLayout {
+    ColumnLayout {
         anchors.top: titleBar.bottom
         anchors.left: parent.left
         anchors.right: parent.right
         anchors.bottom: parent.bottom
         anchors.margins: 20
-        columns: 3
-        columnSpacing: 20
-        rowSpacing: 20
+        spacing: 20
 
-        Gauge {
-            title: "Влажность"
-            units: "%"
-            value: 50
-            minValue: 0
-            maxValue: 100
-            normalMinValue: 10
-            normalMaxValue: 90
+        GridLayout {
+            id: gaugeGrid
+            Layout.fillWidth: true
+            Layout.fillHeight: true
+            columns: 3
+            columnSpacing: 20
+            rowSpacing: 20
+
+            Gauge {
+                title: "Влажность"
+                units: "%"
+                value: 50
+                minValue: 0
+                maxValue: 100
+                normalMinValue: 10
+                normalMaxValue: 90
+            }
+
+            Gauge {
+                title: "Температура"
+                units: "°C"
+                value: 20
+                minValue: 0
+                maxValue: 40
+                normalMinValue: 10
+                normalMaxValue: 30
+                displayMinValue: -50
+                displayMaxValue: 50
+            }
+
+            Gauge {
+                title: "Давление"
+                units: "мм рт ст"
+                value: 760
+                minValue: 0
+                maxValue: 1000
+                normalMinValue: 740
+                normalMaxValue: 770
+                displayMinValue: 600
+                displayMaxValue: 800
+            }
+
+            MetadataCard {
+                label: "25.04.2025"
+            }
+
+            MetadataCard {
+                label: "09:01:00"
+            }
+
+            MetadataCard {
+                label: "Санкт-Петербург"
+            }
         }
 
-        Gauge {
-            title: "Температура"
-            units: "°C"
-            value: 20
-            minValue: 0
-            maxValue: 40
-            normalMinValue: 10
-            normalMaxValue: 30
-            displayMinValue: -50
-            displayMaxValue: 50
-        }
-
-        Gauge {
-            title: "Давление"
-            units: "мм рт ст"
-            value: 760
-            minValue: 0
-            maxValue: 1000
-            normalMinValue: 740
-            normalMaxValue: 770
-            displayMinValue: 600
-            displayMaxValue: 800
-        }
-
-        MetadataCard {
-            label: "25.04.2025"
-        }
-
-        MetadataCard {
-            label: "09:01:00"
-        }
-
-        MetadataCard {
-            label: "Санкт-Петербург"
+        JournalButton {
+            id: journalButton
         }
     }
 }
