@@ -69,5 +69,17 @@ ApplicationWindow {
             displayMinValue: 600
             displayMaxValue: 800
         }
+
+        MetadataCard {
+            label: "25.04.2025"
+        }
+
+        MetadataCard {
+            label: "09:01:00"
+        }
+
+        MetadataCard {
+            label: "Санкт-Петербург"
+        }
     }
 }

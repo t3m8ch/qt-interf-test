@@ -20,6 +20,7 @@ set(QML_FILES
     qml/main.qml
     qml/TitleBar.qml
     qml/Gauge.qml
+    qml/MetadataCard.qml
 )
 
 qt_add_executable(qt-interf-test-app ${SOURCES})
