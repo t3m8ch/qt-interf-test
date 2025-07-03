@@ -8,6 +8,14 @@ Rectangle {
     height: 40
     color: "#2A3740"
 
+    function toggleMaximized() {
+        if (mainwindow.visibility === Window.Maximized) {
+            mainwindow.showNormal();
+        } else {
+            mainwindow.showMaximized();
+        }
+    }
+
     Text {
         text: "Метеоданные"
         color: "#d4d4d4"
@@ -82,13 +90,7 @@ Rectangle {
                 id: maximizeArea
                 anchors.fill: parent
                 hoverEnabled: true
-                onClicked: function () {
-                    if (mainwindow.visibility === Window.Maximized) {
-                        mainwindow.showNormal();
-                    } else {
-                        mainwindow.showMaximized();
-                    }
-                }
+                onClicked: () => toggleMaximized()
             }
         }
 
@@ -120,6 +122,10 @@ Rectangle {
                 onClicked: () => showExitDialog()
             }
         }
+    }
+
+    TapHandler {
+        onDoubleTapped: () => toggleMaximized()
     }
 
     DragHandler {
