@@ -7,8 +7,8 @@ ApplicationWindow {
     id: mainwindow
 
     flags: Qt.Window | Qt.FramelessWindowHint
-    width: 900
-    height: 450
+    width: 600
+    height: 850
     visible: true
     color: "#394955"
     title: "Управление метеоданными"
