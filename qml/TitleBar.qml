@@ -117,9 +117,7 @@ Rectangle {
                 id: closeArea
                 anchors.fill: parent
                 hoverEnabled: true
-                onClicked: () => {
-                    mainwindow.close();
-                }
+                onClicked: () => showExitDialog()
             }
         }
     }

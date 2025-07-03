@@ -22,6 +22,7 @@ set(QML_FILES
     qml/Gauge.qml
     qml/MetadataCard.qml
     qml/ResizeArea.qml
+    qml/ExitDialog.qml
 )
 
 qt_add_executable(qt-interf-test-app ${SOURCES})

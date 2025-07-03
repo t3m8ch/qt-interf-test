@@ -16,6 +16,10 @@ ApplicationWindow {
         return value >= minValue && value <= maxValue;
     }
 
+    function showExitDialog() {
+        exitDialog.open();
+    }
+
     FontLoader {
         id: roboto
         source: "qrc:/qt/qml/QtInterfTest/fonts/Roboto.ttf"
@@ -29,6 +33,10 @@ ApplicationWindow {
     TitleBar {
         id: titleBar
         mainwindow: mainwindow
+    }
+
+    ExitDialog {
+        id: exitDialog
     }
 
     GridLayout {
