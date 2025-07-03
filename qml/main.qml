@@ -10,7 +10,7 @@ ApplicationWindow {
     height: 450
     visible: true
     color: "#394955"
-    title: "QT-Interf"
+    title: "Метеоданные"
 
     function valueInRange(value, minValue, maxValue) {
         return value >= minValue && value <= maxValue;
