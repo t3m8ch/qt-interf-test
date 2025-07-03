@@ -12,10 +12,6 @@ qt_standard_project_setup()
 qt_policy(SET QTP0001 NEW)
 qt_policy(SET QTP0004 NEW)
 
-set(SOURCES
-    src/weatherData/main.cpp
-)
-
 set(RESOURCES
     fonts/Roboto.ttf
     icons/close-line.svg
@@ -59,13 +55,27 @@ target_link_libraries(qt-interf-components PRIVATE
     Qt6::Qml
 )
 
-qt_add_executable(qt-interf-test-app ${SOURCES})
-qt_add_qml_module(qt-interf-test-app
-    URI QtInterfTest
+qt_add_executable(weather-data src/weatherData/main.cpp)
+qt_add_qml_module(weather-data
+    URI QtInterfTest.WeatherData
     VERSION 0.0.1
-    QML_FILES qml/windows/WeatherWindow.qml
+    QML_FILES qml/windows/WeatherDataWindow.qml
 )
-target_link_libraries(qt-interf-test-app PRIVATE
+target_link_libraries(weather-data PRIVATE
+    Qt6::Core
+    Qt6::Quick
+    Qt6::Qml
+    qt-interf-resources
+    qt-interf-components
+)
+
+qt_add_executable(weather-control src/weatherControl/main.cpp)
+qt_add_qml_module(weather-control
+    URI QtInterfTest.WeatherControl
+    VERSION 0.0.1
+    QML_FILES qml/windows/WeatherControlWindow.qml
+)
+target_link_libraries(weather-control PRIVATE
     Qt6::Core
     Qt6::Quick
     Qt6::Qml
