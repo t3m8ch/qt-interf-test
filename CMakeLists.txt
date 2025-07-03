@@ -17,13 +17,13 @@ set(SOURCES
 )
 
 set(QML_FILES
-    qml/WeatherWindow.qml
-    qml/TitleBar.qml
-    qml/Gauge.qml
-    qml/MetadataCard.qml
-    qml/ResizeArea.qml
-    qml/ExitDialog.qml
-    qml/JournalButton.qml
+    qml/windows/WeatherWindow.qml
+    qml/components/TitleBar.qml
+    qml/components/Gauge.qml
+    qml/components/MetadataCard.qml
+    qml/components/ResizeArea.qml
+    qml/components/ExitDialog.qml
+    qml/components/JournalButton.qml
 )
 
 qt_add_executable(qt-interf-test-app ${SOURCES})
