@@ -97,6 +97,24 @@ Rectangle {
         return 360 * ((gaugeRoot.value - gaugeRoot.minValue) / (gaugeRoot.maxValue - gaugeRoot.minValue));
     }
 
+    function gaugeColor(value) {
+        if (valueInRange(gaugeRoot.value, gaugeRoot.normalMinValue, gaugeRoot.normalMaxValue)) {
+            return normalValueColor;
+        } else {
+            return warningValueColor;
+        }
+    }
+
+    function gaugeText(value) {
+        if (!loaded)
+            return "---";
+
+        if (!valueInRange(gaugeRoot.value, gaugeRoot.displayMinValue, gaugeRoot.displayMaxValue))
+            return "---";
+
+        return Math.round(gaugeRoot.value);
+    }
+
     Rectangle {
         id: borderRect
         anchors.fill: parent
@@ -161,7 +179,7 @@ Rectangle {
 
             ShapePath {
                 strokeWidth: 8
-                strokeColor: valueInRange(gaugeRoot.value, gaugeRoot.normalMinValue, gaugeRoot.normalMaxValue) ? normalValueColor : warningValueColor
+                strokeColor: gaugeColor(gaugeRoot.value)
                 fillColor: "transparent"
                 capStyle: ShapePath.RoundCap
 
@@ -178,7 +196,7 @@ Rectangle {
 
         Text {
             anchors.centerIn: parent
-            text: loaded && valueInRange(gaugeRoot.value, gaugeRoot.displayMinValue, gaugeRoot.displayMaxValue) ? Math.round(gaugeRoot.value) : "---"
+            text: gaugeText(gaugeRoot.value)
             color: valueTextColor(gaugeRoot.value)
             font.pixelSize: gaugeContainer.width * 0.3
             font.family: "Roboto"
