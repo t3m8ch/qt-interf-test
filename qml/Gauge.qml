@@ -8,16 +8,81 @@ Rectangle {
     Layout.fillHeight: true
     color: backgroundColor
 
+    /*!
+        \brief Заголовок индикатора, отображаемый сверху компонента.
+    */
     property string title: ""
+
+    /*!
+        \brief Единицы измерения для отображения рядом с заголовком.
+    */
     property string units: ""
+
+    /*!
+        \brief Текущее значение, отображаемое на индикаторе.
+    */
     property real value: 0
-    property real maxValue: 100
+
+    /*!
+        \brief Доступны ли данные. Если да, отобразить значение по правилам ниже,
+        иначе отобразить три штриха.
+    */
     property bool loaded: true
 
+    /*!
+        \brief Отрезок [minValue, maxValue] определяет, при каком диапазоне значений
+        круговая диаграмма будет принимать значения от 0% до 100%.
+    */
+    property real minValue: 0
+    property real maxValue: 100
+
+    /*!
+        \brief При value принадлежащему диапазону [normalMinValue, normalMaxValue]
+        круговая диаграмма будет иметь зелёный цвет, в противном случае - жёлтый.
+    */
+    property real normalMinValue: minValue
+    property real normalMaxValue: maxValue
+
+    /*!
+        \brief При value принадлежащему диапазону [displayMinValue, displayMaxValue]
+        будет отображаться реальное значение белым цветом, в противном случае
+        - три штриха жёлтым цветом.
+    */
+    property real displayMinValue: minValue
+    property real displayMaxValue: maxValue
+
+    /*!
+        \brief Цвет фона компонента индикатора.
+    */
     property color backgroundColor: "#394955"
+
+    /*!
+        \brief Цвет границы и текста заголовка.
+    */
     property color borderColor: "#d4d4d4"
+
+    /*!
+        \brief Цвет фонового кольца индикатора.
+    */
     property color backgroundStrokeColor: "#647D89"
-    property color valueStrokeColor: "#64ff89"
+
+    /*!
+        \brief Цвет активного кольца индикатора в [normalMinValue, normalMaxValue].
+    */
+    property color normalValueColor: "#64ff89"
+
+    /*!
+        \brief Цвет активного кольца индикатора при значении вне [normalMinValue, normalMaxValue].
+    */
+    property color warningValueColor: "#fff500"
+
+    function valueTextColor(value) {
+        if (!loaded) {
+            return backgroundStrokeColor;
+        }
+
+        return valueInRange(value, gaugeRoot.displayMinValue, gaugeRoot.displayMaxValue) ? "white" : warningValueColor;
+    }
 
     Rectangle {
         id: borderRect
@@ -83,7 +148,7 @@ Rectangle {
 
             ShapePath {
                 strokeWidth: 8
-                strokeColor: valueStrokeColor
+                strokeColor: valueInRange(gaugeRoot.value, gaugeRoot.normalMinValue, gaugeRoot.normalMaxValue) ? normalValueColor : warningValueColor
                 fillColor: "transparent"
                 capStyle: ShapePath.RoundCap
 
@@ -93,15 +158,15 @@ Rectangle {
                     radiusX: gaugeContainer.gaugeRadius
                     radiusY: radiusX
                     startAngle: -90
-                    sweepAngle: loaded ? 360 * (gaugeRoot.value / gaugeRoot.maxValue) : 0
+                    sweepAngle: loaded ? 360 * ((gaugeRoot.value - gaugeRoot.minValue) / (gaugeRoot.maxValue - gaugeRoot.minValue)) : 0
                 }
             }
         }
 
         Text {
             anchors.centerIn: parent
-            text: loaded ? Math.round(gaugeRoot.value) : "---"
-            color: loaded ? "white" : backgroundStrokeColor
+            text: loaded && valueInRange(gaugeRoot.value, gaugeRoot.displayMinValue, gaugeRoot.displayMaxValue) ? Math.round(gaugeRoot.value) : "---"
+            color: valueTextColor(gaugeRoot.value)
             font.pixelSize: gaugeContainer.width * 0.3
             font.family: "Roboto"
             font.weight: loaded ? Font.Bold : Font.Normal

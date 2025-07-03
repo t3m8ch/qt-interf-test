@@ -12,6 +12,10 @@ ApplicationWindow {
     color: "#394955"
     title: "QT-Interf"
 
+    function valueInRange(value, minValue, maxValue) {
+        return value >= minValue && value <= maxValue;
+    }
+
     FontLoader {
         id: roboto
         source: "qrc:/qt/qml/QtInterfTest/fonts/Roboto.ttf"
@@ -36,21 +40,34 @@ ApplicationWindow {
             title: "Влажность"
             units: "%"
             value: 50
+            minValue: 0
             maxValue: 100
+            normalMinValue: 10
+            normalMaxValue: 90
         }
 
         Gauge {
             title: "Температура"
             units: "°C"
             value: 20
+            minValue: 0
             maxValue: 40
+            normalMinValue: 10
+            normalMaxValue: 30
+            displayMinValue: -50
+            displayMaxValue: 50
         }
 
         Gauge {
             title: "Давление"
             units: "мм рт ст"
             value: 760
-            maxValue: 800
+            minValue: 0
+            maxValue: 1000
+            normalMinValue: 740
+            normalMaxValue: 770
+            displayMinValue: 600
+            displayMaxValue: 800
         }
     }
 }
