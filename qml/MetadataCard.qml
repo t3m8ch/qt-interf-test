@@ -15,8 +15,8 @@ Rectangle {
 
     Text {
         anchors.centerIn: parent
-        text: label
-        color: label === "" ? borderColor : "#FFFFFF"
+        text: label === "" ? "---" : label
+        color: label === "" ? "#647d89" : "#FFFFFF"
         font.pixelSize: 30
         font.family: "Roboto"
     }
