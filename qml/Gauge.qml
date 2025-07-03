@@ -16,8 +16,8 @@ Rectangle {
 
     property color backgroundColor: "#394955"
     property color borderColor: "#d4d4d4"
-    property color backgroundStrokeColor: "#5a6a77"
-    property color valueStrokeColor: "#4CAF50"
+    property color backgroundStrokeColor: "#647D89"
+    property color valueStrokeColor: "#64ff89"
 
     Rectangle {
         id: borderRect
