@@ -12,6 +12,7 @@ Rectangle {
     property string units: ""
     property real value: 0
     property real maxValue: 100
+    property bool loaded: true
 
     property color backgroundColor: "#394955"
     property color borderColor: "#d4d4d4"
@@ -92,18 +93,18 @@ Rectangle {
                     radiusX: gaugeContainer.gaugeRadius
                     radiusY: radiusX
                     startAngle: -90
-                    sweepAngle: 360 * (gaugeRoot.value / gaugeRoot.maxValue)
+                    sweepAngle: loaded ? 360 * (gaugeRoot.value / gaugeRoot.maxValue) : 0
                 }
             }
         }
 
         Text {
             anchors.centerIn: parent
-            text: Math.round(gaugeRoot.value)
-            color: "white"
+            text: loaded ? Math.round(gaugeRoot.value) : "---"
+            color: loaded ? "white" : backgroundStrokeColor
             font.pixelSize: gaugeContainer.width * 0.3
             font.family: "Roboto"
-            font.weight: Font.Bold
+            font.weight: loaded ? Font.Bold : Font.Normal
         }
     }
 }
