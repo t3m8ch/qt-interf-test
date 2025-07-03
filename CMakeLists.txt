@@ -13,7 +13,7 @@ qt_policy(SET QTP0001 NEW)
 qt_policy(SET QTP0004 NEW)
 
 set(SOURCES
-    src/main.cpp
+    src/weatherData/main.cpp
 )
 
 set(QML_FILES
