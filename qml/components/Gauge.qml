@@ -1,9 +1,10 @@
 import QtQuick
 import QtQuick.Shapes
 
-Rectangle {
+BorderWithBreak {
     id: gaugeRoot
     color: backgroundColor
+    text: title + ", " + units
 
     /*!
         \brief Заголовок индикатора, отображаемый сверху компонента.
@@ -110,36 +111,6 @@ Rectangle {
             return "---";
 
         return Math.round(gaugeRoot.value);
-    }
-
-    Rectangle {
-        id: borderRect
-        anchors.fill: parent
-        color: "transparent"
-        border.color: borderColor
-        border.width: 1
-
-        Rectangle {
-            id: borderBreak
-            height: titleText.height
-            width: titleText.width + 20
-            anchors.top: parent.top
-            anchors.horizontalCenter: parent.horizontalCenter
-            anchors.topMargin: -height / 2
-            color: backgroundColor
-        }
-    }
-
-    Text {
-        id: titleText
-        text: parent.title + ", " + parent.units
-        color: borderColor
-        font.pixelSize: 22
-        font.family: "Roboto"
-        anchors.top: parent.top
-        anchors.horizontalCenter: parent.horizontalCenter
-        anchors.topMargin: -height / 2
-        z: 2
     }
 
     Item {

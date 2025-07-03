@@ -39,6 +39,7 @@ set(COMPONENTS
     qml/components/ResizeArea.qml
     qml/components/ExitDialog.qml
     qml/components/JournalButton.qml
+    qml/components/BorderWithBreak.qml
 )
 
 qt_add_library(qt-interf-components ${COMPONENTS})
